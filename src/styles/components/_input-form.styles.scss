@@ -1,0 +1,36 @@
+.input-form {
+  margin-bottom: $l-size;
+  position: relative;
+}
+
+.input-form__label {
+  position: absolute;
+  font-size: 14px;
+  font-weight: lighter;
+  color: $grey;
+  bottom: 8px;
+  left: 5px;
+  pointer-events: none;
+  transition: ease all 0.3s;
+  &.input-form__shrink {
+    font-size: 12px;
+    bottom: 35px;
+  }
+}
+
+.input-form__input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid $light-grey;
+  font-size: 16px;
+  font-weight: 500;
+  color: $grey;
+  width: 100%;
+  padding: 7px;
+
+  &:focus ~ .input-form__label {
+    font-size: 12px;
+    bottom: 35px;
+  }
+}

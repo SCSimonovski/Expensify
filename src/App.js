@@ -1,25 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { Provider } from "react-redux";
+import AppRouter from "./routers/AppRouter";
+import configureStore from "./redux/store/configureStore";
+import { PersistGate } from "redux-persist/integration/react";
+
+import "react-dates/lib/css/_datepicker.css";
+import "./styles/styles.scss";
+
+const { store, persistor } = configureStore();
 
 function App() {
+  useEffect(() => {});
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <AppRouter />
+      </PersistGate>
+    </Provider>
   );
 }
 

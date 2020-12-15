@@ -1,0 +1,73 @@
+.box-layout {
+  background: url("../images/ben-o-bro-wpU4veNGnHg-unsplash.jpg");
+  background-size: cover;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box-layout__box {
+  background: fade-out($color: #fff, $amount: 0.15);
+  width: 35rem;
+  padding: $l-size $m-size;
+  margin: $l-size $m-size;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.box-layout__logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.box-layout__title-icon {
+  font-size: $font-size-box-icon;
+}
+
+.box-layout__form {
+  display: flex;
+  flex-direction: column;
+  margin-top: $l-size;
+}
+
+.box-layout__error {
+  color: $error-red;
+  font-style: italic;
+  font-size: 14px;
+  font-weight: lighter;
+  margin-top: -$m-size;
+  margin-bottom: $m-size;
+}
+
+.box-layout__buttons {
+  display: flex;
+  flex-direction: column;
+  row-gap: $s-size;
+  justify-content: space-between;
+}
+
+.box-layout__mode-button {
+  font-size: 14px;
+  color: $dark-grey;
+  text-decoration: none;
+  margin-top: $s-size;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.google-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.google-button__icon {
+  font-size: 30px;
+  margin-right: 4px;
+}

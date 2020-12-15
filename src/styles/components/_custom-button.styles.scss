@@ -1,0 +1,22 @@
+.button {
+  background-color: #000;
+  border: 1px solid black;
+  color: #fff;
+  font-size: $font-size-button;
+  height: $xl-size;
+
+  &:hover {
+    background-color: hsl(0, 0%, 5%);
+    cursor: pointer;
+  }
+
+  &.blue {
+    background-color: $blue;
+    border: none;
+
+    &:hover {
+      background-color: darken($blue, 5%);
+      color: #fff;
+    }
+  }
+}

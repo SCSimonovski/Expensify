@@ -1,0 +1,40 @@
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+.blue-button {
+  border: none;
+  display: inline-block;
+  text-decoration: none;
+  padding: $s-size;
+  font-size: $font-size-large;
+  line-height: 1;
+  font-weight: 300;
+  background: $blue;
+  color: white;
+  margin-top: $m-size;
+  transition: background 0.3s ease;
+  &:hover {
+    background: darken($blue, 5%);
+  }
+}
+
+.blue-button--link {
+  background: transparent;
+  margin: 0;
+  &:hover {
+    background: transparent;
+  }
+}
+
+.remove-button {
+  @extend .blue-button;
+  background: $grey;
+  &:hover {
+    background: darken($grey, 5%);
+  }
+}

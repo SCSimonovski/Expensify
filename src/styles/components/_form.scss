@@ -1,0 +1,21 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  > * {
+    margin-bottom: $m-size;
+  }
+}
+
+.buttons-div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-error {
+  font-style: italic;
+  color: $error-red;
+}
+
+.SingleDatePickerInput {
+  display: flex;
+}
