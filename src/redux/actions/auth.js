@@ -6,8 +6,14 @@ import {
   signUpRequest,
 } from "../../api/auth-api";
 
+const setLoading = () => ({
+  type: userActionTypes.SET_LOADING,
+});
+
 export const signInWithEmailStart = (emailAndPassword) => {
   return async (dispatch) => {
+    dispatch(setLoading());
+
     try {
       const userCredentials = await signInWithEmailAndPassword(
         emailAndPassword
@@ -21,6 +27,8 @@ export const signInWithEmailStart = (emailAndPassword) => {
 
 export const signInWithGoogleStart = (tokenId) => {
   return async (dispatch) => {
+    dispatch(setLoading());
+
     try {
       const userCredentials = await signInWithGoogle(tokenId);
       dispatch(signInSuccess(userCredentials));
@@ -44,6 +52,8 @@ export const signInSuccess = (userCredentials) => {
 
 export const signOutStart = () => {
   return async (dispatch, getState) => {
+    dispatch(setLoading());
+
     const { token, currentUser } = getState().auth;
     try {
       if (!token) {
@@ -66,6 +76,8 @@ export const signOutSuccess = () => ({
 
 export const signUpStart = (newUser) => {
   return async (dispatch) => {
+    dispatch(setLoading());
+
     try {
       const userCredentials = await signUpRequest(newUser);
       dispatch(signUpSuccess(userCredentials));

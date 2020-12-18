@@ -16,6 +16,7 @@ const authReducer = (state = INITIAL_STATE, actions) => {
         token: null,
         expiration: null,
         error: null,
+        loading: false,
       };
 
     case userActionTypes.SIGN_IN_SUCCESS:
@@ -25,12 +26,20 @@ const authReducer = (state = INITIAL_STATE, actions) => {
         token: actions.payload.token,
         expiration: actions.payload.expiration,
         error: null,
+        loading: false,
       };
 
     case userActionTypes.AUTH_FAILURE:
       return {
         ...state,
         error: actions.payload,
+        loading: false,
+      };
+
+    case userActionTypes.SET_LOADING:
+      return {
+        ...state,
+        loading: true,
       };
 
     case userActionTypes.CLEAR_ERROR:

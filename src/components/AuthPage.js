@@ -94,6 +94,9 @@ const AuthPage = () => {
 
   const handleSignUpClick = (e) => {
     e.preventDefault();
+    console.log("blablaaa");
+    console.log(process.env.REACT_APP_BACKEND_URL, "ok");
+    console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID);
 
     if (!displayName || !displayName || !password || !confirmPassword) {
       setError("You need to provide all necessary information");
@@ -108,8 +111,8 @@ const AuthPage = () => {
     }
   };
 
-  const responseGoogle = ({ tokenId }) => {
-    dispatch(signInWithGoogleStart(tokenId));
+  const responseGoogle = (response) => {
+    dispatch(signInWithGoogleStart(response.tokenId));
   };
 
   const responseGoogleFailure = (error) => {

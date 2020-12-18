@@ -35,7 +35,7 @@ export const sendRequest = async (
 
 export const createExpenseRequest = async (expense, token) => {
   const data = await sendRequest(
-    "http://localhost:5000/expenses",
+    `${process.env.REACT_APP_BACKEND_URL}/expenses`,
     "POST",
     { "Content-Type": "application/json", Authorization: "Bearer " + token },
     expense
@@ -48,7 +48,7 @@ export const createExpenseRequest = async (expense, token) => {
 
 export const editExpenseRequest = async (expense, expenseId, token) => {
   const data = await sendRequest(
-    `http://localhost:5000/expenses/${expenseId}`,
+    `${process.env.REACT_APP_BACKEND_URL}/expenses/${expenseId}`,
     "PATCH",
     { "Content-Type": "application/json", Authorization: "Bearer " + token },
     expense
@@ -60,9 +60,13 @@ export const editExpenseRequest = async (expense, expenseId, token) => {
 // GET ALL EXPENSES //////////////////////////////////////
 
 export const setExpensesRequest = async (token) => {
-  const data = await sendRequest(`http://localhost:5000/expenses`, "GET", {
-    Authorization: "Bearer " + token,
-  });
+  const data = await sendRequest(
+    `${process.env.REACT_APP_BACKEND_URL}/expenses`,
+    "GET",
+    {
+      Authorization: "Bearer " + token,
+    }
+  );
 
   return data;
 };
@@ -71,7 +75,7 @@ export const setExpensesRequest = async (token) => {
 
 export const removeExpenseRequest = async (id, token) => {
   const data = await sendRequest(
-    `http://localhost:5000/expenses/${id}`,
+    `${process.env.REACT_APP_BACKEND_URL}/expenses/${id}`,
     "DELETE",
     {
       Authorization: "Bearer " + token,

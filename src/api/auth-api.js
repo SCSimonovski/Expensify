@@ -1,6 +1,3 @@
-// import { store } from "../redux/store";
-// import { signOutSuccess } from "../redux/actions/auth";
-
 export const sendRequest = async (
   url,
   method = "GET",
@@ -35,7 +32,7 @@ export const sendRequest = async (
 
 export const signInWithEmailAndPassword = async (user) => {
   const data = await sendRequest(
-    "http://localhost:5000/users/login",
+    `${process.env.REACT_APP_BACKEND_URL}/users/login`,
     "POST",
     { "Content-Type": "application/json" },
     user
@@ -46,7 +43,7 @@ export const signInWithEmailAndPassword = async (user) => {
 
 export const signInWithGoogle = async (tokenId) => {
   const data = await sendRequest(
-    "http://localhost:5000/users/login/google",
+    `${process.env.REACT_APP_BACKEND_URL}/users/login/google`,
     "POST",
     { "Content-Type": "application/json" },
     { tokenId }
@@ -60,7 +57,7 @@ export const signInWithGoogle = async (tokenId) => {
 
 export const signUpRequest = async (user) => {
   const data = await sendRequest(
-    "http://localhost:5000/users",
+    `${process.env.REACT_APP_BACKEND_URL}/users`,
     "POST",
     { "Content-Type": "application/json" },
     user
@@ -74,7 +71,7 @@ export const signUpRequest = async (user) => {
 
 export const signOutRequest = async (id, token) => {
   return await sendRequest(
-    "http://localhost:5000/users/logout",
+    `${process.env.REACT_APP_BACKEND_URL}/users/logout`,
     "POST",
     { "Content-Type": "application/json" },
     { id, token }
