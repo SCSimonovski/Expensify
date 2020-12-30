@@ -31,7 +31,7 @@ const ExpenseForm = ({ onSubmit, onRemoveButtonClick, expense }) => {
   const onFormSubmit = (e) => {
     e.preventDefault();
     if (!description || !amount) {
-      setError("Please privde the necessary information!");
+      setError("Please provide the necessary information.");
     } else {
       setLoading(true);
       setError("");

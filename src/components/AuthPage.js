@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import isEmail from "validator/lib/isEmail";
 import { HiCash } from "react-icons/hi";
 
 import CustomButton from "./CustomButton";
@@ -25,10 +26,11 @@ const AuthPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
   const [isSignUpMode, setIsSignUpMode] = useState(false);
 
   const history = useHistory();
+  const emailField = useRef(null);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -63,7 +65,7 @@ const AuthPage = () => {
   };
 
   const handleChange = (e) => {
-    error && setError(null);
+    setError("");
 
     const { value, name } = e.target;
     switch (name) {
@@ -85,30 +87,43 @@ const AuthPage = () => {
   };
 
   const handleSignInClick = () => {
-    if (!email || !password) {
-      setError("You must enter email and password!");
+    if (email === "" || !isEmail(email)) {
+      setError("Please enter a valid email address.");
       return;
     }
+
+    if (password.length < 8) {
+      setError("Please enter a valid password, at least 8 characters.");
+      return;
+    }
+
     dispatch(signInWithEmailStart({ email, password }));
   };
 
   const handleSignUpClick = (e) => {
     e.preventDefault();
-    console.log("blablaaa");
-    console.log(process.env.REACT_APP_BACKEND_URL, "ok");
-    console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID);
 
-    if (!displayName || !displayName || !password || !confirmPassword) {
-      setError("You need to provide all necessary information");
+    if (displayName === "") {
+      setError("Please enter a name");
       return;
     }
 
-    if (password === confirmPassword) {
-      setError(null);
-      dispatch(signUpStart({ email, password, name: displayName }));
-    } else {
-      setError("Passwords don't match!");
+    if (email === "" || !isEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
     }
+
+    if (password.length < 8) {
+      setError("Please enter a valid password, at least 8 characters.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Passwords don't match");
+      return;
+    }
+
+    dispatch(signUpStart({ email, password, name: displayName }));
   };
 
   const responseGoogle = (response) => {
@@ -118,6 +133,20 @@ const AuthPage = () => {
   const responseGoogleFailure = (error) => {
     setError("Unable to login with Google");
   };
+
+  useEffect(() => {
+    let interval = setInterval(() => {
+      if (emailField.current.value) {
+        setEmail(emailField.current.value);
+      }
+    }, 100);
+
+    return () => {
+      clearInterval(interval);
+      1;
+    };
+  }, []);
+
   return (
     <div className="box-layout">
       <div className="box-layout__box">
@@ -148,6 +177,7 @@ const AuthPage = () => {
             type="text"
             label="Email"
             required
+            refInput={emailField}
           />
           <InputForm
             onChange={handleChange}
