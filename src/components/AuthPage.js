@@ -143,7 +143,6 @@ const AuthPage = () => {
 
     return () => {
       clearInterval(interval);
-      1;
     };
   }, []);
 

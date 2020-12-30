@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { SingleDatePicker } from "react-dates";
+import moment from "moment";
 
 import Spinner from "../components/Spinner";
 
@@ -8,6 +10,8 @@ const ExpenseForm = ({ onSubmit, onRemoveButtonClick, expense }) => {
   );
   const [note, setNote] = useState(expense ? expense.note : "");
   const [amount, setAmount] = useState(expense ? expense.amount / 100 : "");
+  const [date, setDate] = useState(expense ? moment(expense.date) : null);
+  const [focused, setFocused] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -35,10 +39,12 @@ const ExpenseForm = ({ onSubmit, onRemoveButtonClick, expense }) => {
     } else {
       setLoading(true);
       setError("");
+
       onSubmit(
         {
           description,
           amount: parseFloat(amount) * 100,
+          date: date ? date.valueOf() : moment().valueOf(),
           note,
         },
         expense?.id
@@ -73,6 +79,16 @@ const ExpenseForm = ({ onSubmit, onRemoveButtonClick, expense }) => {
           placeholder="Amount"
           value={amount}
           onChange={onAmountChange}
+        />
+
+        <SingleDatePicker
+          date={date} // momentPropTypes.momentObj or null
+          onDateChange={(date) => setDate(date)} // PropTypes.func.isRequired
+          focused={focused} // PropTypes.bool
+          onFocusChange={({ focused }) => setFocused(focused)} // PropTypes.func.isRequired
+          id="calendar_id" // PropTypes.string.isRequired,
+          numberOfMonths={1}
+          isOutsideRange={() => false}
         />
 
         <textarea

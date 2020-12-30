@@ -5,6 +5,8 @@ import configureStore from "./redux/store/configureStore";
 import { PersistGate } from "redux-persist/integration/react";
 
 import "react-dates/lib/css/_datepicker.css";
+import "react-dates/initialize";
+
 import "./styles/styles.scss";
 
 const { store, persistor } = configureStore();

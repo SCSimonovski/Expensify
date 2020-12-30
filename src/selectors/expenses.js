@@ -6,7 +6,7 @@ export const getVisibleExpenses = (
   { sortBy, text, startDate, endDate }
 ) => {
   expenses = expenses.filter((expense) => {
-    const createdAtMoment = moment(expense.createdAt);
+    const createdAtMoment = moment(expense.date);
     const startDateMatch = startDate
       ? moment(startDate).isBefore(createdAtMoment)
       : true;
@@ -22,7 +22,7 @@ export const getVisibleExpenses = (
   });
 
   if (sortBy === "date") {
-    expenses.sort((a, b) => a.createdAt - b.createdAt);
+    expenses.sort((a, b) => a.date - b.date);
   } else {
     expenses.sort((a, b) => a.amount - b.amount);
   }

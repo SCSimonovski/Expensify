@@ -41,7 +41,11 @@ const expensesReducer = (state = INITIAL_STATE, action) => {
       };
 
     case expensesActionTypes.SET_EXPENSES:
-      return { ...state, error: null, userExpenses: action.expenses };
+      return {
+        ...state,
+        error: null,
+        userExpenses: action.expenses,
+      };
 
     case expensesActionTypes.EXPENSES_FAILURE:
       return {

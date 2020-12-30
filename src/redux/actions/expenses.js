@@ -1,4 +1,5 @@
 import { expensesActionTypes } from "../types/expenses";
+
 import {
   createExpenseRequest,
   editExpenseRequest,
@@ -22,8 +23,8 @@ export const startAddExpense = (expenseObj = {}) => {
       throw new Error("You're not authenticated");
     }
 
-    const { description = "", note = "", amount = 0 } = expenseObj;
-    const expenseToAdd = { description, note, amount, owner };
+    const { description = "", note = "", amount = 0, date } = expenseObj;
+    const expenseToAdd = { description, note, amount, date, owner };
 
     try {
       const expense = await createExpenseRequest(expenseToAdd, token);
@@ -72,7 +73,8 @@ export const startEditExpense = (update, id) => {
   };
 };
 
-//Set expenses from firebase
+//Set expenses
+
 export const setExpenses = (expenses) => ({
   type: expensesActionTypes.SET_EXPENSES,
   expenses,
