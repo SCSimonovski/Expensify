@@ -234,8 +234,8 @@ const AuthPage = () => {
 
         <button className="box-layout__mode-button" onClick={toggleMode}>
           {isSignUpMode
-            ? "Don't have an account? Sign Up"
-            : "You already have an account? Sign In"}
+            ? "You already have an account? Sign In"
+            : "Don't have an account? Sign Up"}
         </button>
       </div>
     </div>
